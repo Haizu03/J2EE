@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Bai2Application<Bai2>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "phattrienungdungj2ee.bai2.Bai2.Bai2Application",
+            "projectName": "Bai2",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
