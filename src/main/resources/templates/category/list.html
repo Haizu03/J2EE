@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{_layout}">
+<body>
+<div layout:fragment="content" class="container body-content">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Categories</h2>
+        <a th:href="@{/categories/add}" class="btn btn-primary">Create New Category</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th style="width: 180px;">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c : ${categories}">
+            <th scope="row" th:text="${c.id}"></th>
+            <td th:text="${c.name}"></td>
+            <td>
+                <a class="btn btn-secondary btn-sm"
+                   th:href="@{/categories/edit/{id}(id=${c.id})}">Edit</a>
+                <form th:action="@{/categories/delete/{id}(id=${c.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this category?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
