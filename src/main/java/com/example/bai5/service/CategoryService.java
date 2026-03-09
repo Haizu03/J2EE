@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class CategoryService {
+
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -20,11 +21,11 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public Category getCategoryById(Integer id) {
+    public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
 
-    public void deleteCategory(Integer id) {
+    public void deleteCategoryById(Long id) {
         categoryRepository.deleteById(id);
     }
 }

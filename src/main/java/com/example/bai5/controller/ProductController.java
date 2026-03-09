@@ -3,11 +3,9 @@ package com.example.bai5.controller;
 import com.example.bai5.model.Product;
 import com.example.bai5.service.CategoryService;
 import com.example.bai5.service.ProductService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -34,58 +32,29 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String saveProduct(@Valid @ModelAttribute("product") Product product,
-                              BindingResult result,
-                              Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("categories", categoryService.getAllCategories());
-            return "product/add";
-        }
-
-        try {
-            productService.saveProduct(product);
-        } catch (IllegalArgumentException ex) {
-            result.rejectValue("category", "category.invalid", ex.getMessage());
-            model.addAttribute("categories", categoryService.getAllCategories());
-            return "product/add";
-        }
-
+    public String saveProduct(@ModelAttribute("product") Product product) {
+        productService.saveProduct(product);
         return "redirect:/products";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") Long id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model) {
         Product product = productService.getProductById(id);
-        if (product == null) return "redirect:/products";
-
         model.addAttribute("product", product);
         model.addAttribute("categories", categoryService.getAllCategories());
         return "product/edit";
     }
 
     @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable("id") Long id,
-                                @Valid @ModelAttribute("product") Product product,
-                                BindingResult result,
-                                Model model) {
-        if (result.hasErrors()) {
-            model.addAttribute("categories", categoryService.getAllCategories());
-            return "product/edit";
-        }
+    public String updateProduct(@PathVariable Long id, @ModelAttribute("product") Product product) {
         product.setId(id);
-        try {
-            productService.saveProduct(product);
-        } catch (IllegalArgumentException ex) {
-            result.rejectValue("category", "category.invalid", ex.getMessage());
-            model.addAttribute("categories", categoryService.getAllCategories());
-            return "product/edit";
-        }
+        productService.saveProduct(product);
         return "redirect:/products";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable("id") Long id) {
-        productService.deleteProduct(id);
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productService.deleteProductById(id);
         return "redirect:/products";
     }
 }

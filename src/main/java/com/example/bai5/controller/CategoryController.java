@@ -2,11 +2,9 @@ package com.example.bai5.controller;
 
 import com.example.bai5.model.Category;
 import com.example.bai5.service.CategoryService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -29,38 +27,27 @@ public class CategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@Valid @ModelAttribute("category") Category category,
-                               BindingResult result) {
-        if (result.hasErrors()) {
-            return "category/add";
-        }
+    public String saveCategory(@ModelAttribute("category") Category category) {
         categoryService.saveCategory(category);
         return "redirect:/categories";
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id") Integer id, Model model) {
-        Category category = categoryService.getCategoryById(id);
-        if (category == null) return "redirect:/categories";
-        model.addAttribute("category", category);
+    public String showEditForm(@PathVariable Long id, Model model) {
+        model.addAttribute("category", categoryService.getCategoryById(id));
         return "category/edit";
     }
 
     @PostMapping("/update/{id}")
-    public String updateCategory(@PathVariable("id") Integer id,
-                                 @Valid @ModelAttribute("category") Category category,
-                                 BindingResult result) {
-        if (result.hasErrors()) {
-            return "category/edit";
-        }
+    public String updateCategory(@PathVariable Long id, @ModelAttribute("category") Category category) {
         category.setId(id);
         categoryService.saveCategory(category);
         return "redirect:/categories";
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Integer id) {
-        categoryService.deleteCategory(id);
+    @GetMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategoryById(id);
         return "redirect:/categories";
     }
 }
