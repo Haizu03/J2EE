@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Spring Boot</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #6a11cb, transparent 40%),
+                radial-gradient(circle at bottom right, #2575fc, transparent 40%),
+                linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 48px 56px;
+            width: 420px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            animation: floatIn 1s ease forwards;
+        }
+
+        @keyframes floatIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #ffdd00, #ff9f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 15px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.25);
+            font-size: 13px;
+        }
+
+        button {
+            margin-top: 26px;
+            padding: 12px 26px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ffdd00, #ff9f00);
+            color: #000;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 200, 0, 0.4);
+        }
+
+        footer {
+            margin-top: 28px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>Welcome to <span>Spring Boot</span> 🚀</h1>
+    <p>Ứng dụng của bạn đã khởi động thất bại</p>
+    <p>Trang hiện tại: <b>/home</b></p>
+
+    <div class="badge">Spring MVC • Controller • View • Hải Vũ</div>
+
+    <button onclick="showMessage()">Kiểm tra hệ thống</button>
+
+    <footer>
+        © 2026 • Powered by Java & Spring
+    </footer>
+</div>
+
+<script>
+    function showMessage() {
+        alert("Bạn Thất Bại Hãy Đầu Tư HDPE Là Ngon Luôn😎🔥");
+    }
+</script>
+
+</body>
+</html>
